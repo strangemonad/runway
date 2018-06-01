@@ -1,6 +1,16 @@
-# runway
+# Runway
 Domain models and their values
 
+# TODO
+
+- make this a rust workspace (rather than single crate)
+- sourcery is its own crate.
+
+
+# Syntax design
+
+- I want to easily figure out what namespace / package / module I'm in when I'm just in a file
+- I want to easily figure out what package something else comes from (e.g. go is pretty good here)
 
 
 # Language / type system Ideas

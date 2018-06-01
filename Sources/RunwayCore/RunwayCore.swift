@@ -43,15 +43,15 @@ public enum Declaration {
 // Runway analog to a Program
 // Actually should be Spec = Decl, Optional<Spec>
 // I.e. a Spec is a co-inductive type (like a stream of declarations)
-public protocol Spec {
-    var decls:[Decl]
+// public protocol Spec {
+//     var decls:[Decl]
 
-    static func process(topLevelDelaration topDecl:Decl assuming basis:Basis) -> Basis
+//     static func process(topLevelDelaration topDecl:Decl assuming basis:Basis) -> Basis
 
-    // func interpret?
+//     // func interpret?
 
-    // spec is a sequence of top-level decs
-    // assuming a basis, given a spec you get a modified basis
-    //  B |- spec => B
-}
+//     // spec is a sequence of top-level decs
+//     // assuming a basis, given a spec you get a modified basis
+//     //  B |- spec => B
+// }
 

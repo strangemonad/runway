@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "SwiftBase",
+        "repositoryURL": "/Users/shawn/Dropbox/Development/SwiftBase",
+        "state": {
+          "branch": "master",
+          "revision": "b5d8197372d5f0600aa64466f482952dcb92be8d",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}

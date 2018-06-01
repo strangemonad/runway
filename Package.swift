@@ -8,6 +8,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "../SwiftBase", .branch("master"))
     ],
     targets: [
         // Library
@@ -26,16 +27,25 @@ let package = Package(
 
 
         .target(
-            name: "SourceryJava",
+            name: "Sourcery",
             dependencies: []),
+        .target(
+            name: "SourceryJava",
+            dependencies: ["Sourcery"]),
 
         // Command line tool targets
         .target(
             name: "runway",
             dependencies: [
+                "SwiftBase",
+
                 "RunwayCommon",
                 "RunwayModule",
-                "RunwayPackage"]),
+                "RunwayPackage",
+                
+                "Sourcery",
+                "SourceryJava"
+                ]),
 
 
         .testTarget(

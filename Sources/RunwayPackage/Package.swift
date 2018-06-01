@@ -3,22 +3,22 @@
 // qualified symbols (in their respective NS)
 //  to module structures
 
-import RunwayModule
+// import RunwayModule
 
 // Probably invert control? 
 // a library is a collection of fq-identifiable module-esque things
 
 
-public struct Library {
-    // XXX naming (not to be confused with core language
-    // decls within modules). Probably more Like 
+// public struct Library {
+//     // XXX naming (not to be confused with core language
+//     // decls within modules). Probably more Like 
     
-    var definitions:[Module]
+//     var definitions:[Module]
 
-    public init(definitions: [Module]) {
-        self.definitions = definitions
-    }
-}
+//     public init(definitions: [Module]) {
+//         self.definitions = definitions
+//     }
+// }
 
 // XXX library builder / mutable library
 

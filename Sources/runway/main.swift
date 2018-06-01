@@ -2,36 +2,78 @@
 // - generate hard coded java /  output
 // e.g. type point2d := (int, int)
 
+import SourceryJava
 
-import RunwayCommon
-import RunwayModule
-import RunwayPackage
+
+let javaFile = SourceryJava.File(
+    package: "acme.time",
+    topLevel: .clazz(Class(
+        name:"Instant",
+        fields: [
+            Field(type: TypeIdentifier("Long"), name: Identifier("millis")),
+            Field(type: TypeIdentifier("Long"), name: Identifier("nanos"))
+        ])))
+
+print(javaFile.format())
+
+
+    let instant = syntax::Def {
+        name: "Instant".to_owned(),
+        ty: syntax::Ty::Data(syntax::DataSig {
+            cons: vec![("millis".to_owned(), syntax::Ty::Int)]
+        })
+    };
+
+    let acme_time = syntax::Lib {
+        namespace: "acme.time".to_owned(),
+        top_level: syntax::Sig(vec![
+            syntax::Dec::Def(instant)
+        ])
+    };
+
+    // java::Translator lib -> [Format-able] (start with [java::syntax::File])
+    let t = translators::java::Translator::new(acme_time);
+    let java = t.translate("acme.time.Instant").unwrap();
+
+    t.translate("acme.time.Instant");
+    
+    println!("{:?}", java);
+    
+//    t.translate(acme_time);
+
+    // this needs to be in a lib / module to start converting
+
+
+
+// import RunwayCommon
+// import RunwayModule
+// import RunwayPackage
 
 // The namespaces for some libraries we're "depending" on.
-let runwayTime = Namespace("runway", "time")
-let acmeBlog = Namespace("acme", "blog")
-let acmeCommon = Namespace("acme", "common")
+// let runwayTime = Namespace("runway", "time")
+// let acmeBlog = Namespace("acme", "blog")
+// let acmeCommon = Namespace("acme", "common")
 
 // Some things we'll define
-let instant = QualifiedModuleId(ns:runwayTime, "Instant")
-let person = QualifiedModuleId(ns:acmeCommon, "Person")
-let post = QualifiedModuleId(ns:acmeBlog, "Post")
+// let instant = QualifiedModuleId(ns:runwayTime, "Instant")
+// let person = QualifiedModuleId(ns:acmeCommon, "Person")
+// let post = QualifiedModuleId(ns:acmeBlog, "Post")
 
-let libRunwayTime = Library(definitions: [
-    Module.spec(id:instant, Spec.data)
-])
+// let libRunwayTime = Library(definitions: [
+//     Module.spec(id:instant, Spec.data)
+// ])
 
-let libAcmeCommon = Library(definitions: [
-    Module.spec(id:person, Spec.data)
-])
+// let libAcmeCommon = Library(definitions: [
+//     Module.spec(id:person, Spec.data)
+// ])
 
-let libAcmeBlog = Library(definitions: [
-    Module.spec(id:post, Spec.data)
-])
+// let libAcmeBlog = Library(definitions: [
+//     Module.spec(id:post, Spec.data)
+// ])
 
-print(libRunwayTime)
-print(libAcmeCommon)
-print(libAcmeBlog)
+// print(libRunwayTime)
+// print(libAcmeCommon)
+// print(libAcmeBlog)
 
 // protocol SpecCompiler {
 //     func compile(spec:Spec) throws

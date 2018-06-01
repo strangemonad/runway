@@ -3,15 +3,35 @@ import RunwayCommon
 // TODO, where do long Ids (sub-module paths) belong
 
 
-public enum Spec {
-    case data
-    case spec
-}
+//// rust
+// For now
+// Module := Spec | Morphism
 
-public enum SpecMorphism {
-    case view
-    case realization
-}
+//enum Module {
+//    // Spec | Morphism
+//}
+//
+//struct Spec {
+//
+//}
+//
+//struct SpecMorphism {
+//
+//}
+////  /rust
+
+
+
+
+// public enum Spec {
+//     case data
+//     case spec
+// }
+
+// public enum SpecMorphism {
+//     case view
+//     case realization
+// }
 
 /**
  * A module is either a named specification or a named morphism between specifications.
@@ -28,18 +48,18 @@ public enum SpecMorphism {
  *  Spec   
  *  SpecMorphism := id : o -> o = 
  */
-public enum Module {
-    case spec(id:QualifiedModuleId, _:Spec)
-    case morphism(id:QualifiedModuleId, _:SpecMorphism)
+// public enum Module {
+//     case spec(id:QualifiedModuleId, _:Spec)
+//     case morphism(id:QualifiedModuleId, _:SpecMorphism)
 
-    public var id: QualifiedModuleId {
-        switch self {
-        case let .spec(id, _):
-            return id
-        case let .morphism(id, _):
-            return id
-        }
-    }
-}
+//     public var id: QualifiedModuleId {
+//         switch self {
+//         case let .spec(id, _):
+//             return id
+//         case let .morphism(id, _):
+//             return id
+//         }
+//     }
+// }
 
-public typealias QualifiedModuleId = QualifiedId<Module>
+// public typealias QualifiedModuleId = QualifiedId<Module>
