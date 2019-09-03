@@ -40,12 +40,14 @@ let package = Package(
                 "SwiftBase",
 
                 "RunwayCommon",
+                "RunwayCore",
                 "RunwayModule",
                 "RunwayPackage",
                 
                 "Sourcery",
-                "SourceryJava"
-                ]),
+                "SourceryJava",
+                ],
+            path: "Sources/runway"),
 
 
         .testTarget(

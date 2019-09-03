@@ -2,42 +2,61 @@
 // - generate hard coded java /  output
 // e.g. type point2d := (int, int)
 
+import RunwayCore
 import SourceryJava
 
+let instant = Syntax.Decl(name: "Instant", ty: .data(Syntax.DataSig([
+    Syntax.Decl(name: "millis", ty: .int)
+    Syntax.Decl(name: "nanos", ty: .int)
+    ])))
 
-let javaFile = SourceryJava.File(
-    package: "acme.time",
-    topLevel: .clazz(Class(
-        name:"Instant",
-        fields: [
-            Field(type: TypeIdentifier("Long"), name: Identifier("millis")),
-            Field(type: TypeIdentifier("Long"), name: Identifier("nanos"))
-        ])))
+let acmeTime = Syntax.Lib(namespace: "acme.time", declarations: [
+    .decl(instant)
+    ])
 
-print(javaFile.format())
+// XXX Env, Reader
+
+let env = Map
+
+let javaTranaslator = JavaTranslator(lib: acmeTime)
+let translated = javaTranaslator.translate(qualifiedId: "acme.time.Instant")
+
+print(translated.format())
 
 
-    let instant = syntax::Def {
-        name: "Instant".to_owned(),
-        ty: syntax::Ty::Data(syntax::DataSig {
-            cons: vec![("millis".to_owned(), syntax::Ty::Int)]
-        })
-    };
+// let javaFile = SourceryJava.File(
+//     package: "acme.time",
+//     topLevel: .clazz(Class(
+//         name:"Instant",
+//         fields: [
+//             Field(type: TypeIdentifier("Long"), name: Identifier("millis")),
+//             Field(type: TypeIdentifier("Long"), name: Identifier("nanos"))
+//         ])))
 
-    let acme_time = syntax::Lib {
-        namespace: "acme.time".to_owned(),
-        top_level: syntax::Sig(vec![
-            syntax::Dec::Def(instant)
-        ])
-    };
+// print(javaFile.format())
 
-    // java::Translator lib -> [Format-able] (start with [java::syntax::File])
-    let t = translators::java::Translator::new(acme_time);
-    let java = t.translate("acme.time.Instant").unwrap();
 
-    t.translate("acme.time.Instant");
+    // let instant = syntax::Def {
+    //     name: "Instant".to_owned(),
+    //     ty: syntax::Ty::Data(syntax::DataSig {
+    //         cons: vec![("millis".to_owned(), syntax::Ty::Int)]
+    //     })
+    // };
+
+    // let acme_time = syntax::Lib {
+    //     namespace: "acme.time".to_owned(),
+    //     top_level: syntax::Sig(vec![
+    //         syntax::Dec::Def(instant)
+    //     ])
+    // };
+
+    // // java::Translator lib -> [Format-able] (start with [java::syntax::File])
+    // let t = translators::java::Translator::new(acme_time);
+    // let java = t.translate("acme.time.Instant").unwrap();
+
+    // t.translate("acme.time.Instant");
     
-    println!("{:?}", java);
+    // println!("{:?}", java);
     
 //    t.translate(acme_time);
 

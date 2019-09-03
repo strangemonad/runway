@@ -24,3 +24,11 @@
 
 // XXX need a signature only view of libraries to 
 // allow them to be included as deps
+
+///// A collection of modules.
+//struct Lib {
+//    // name / namespace root
+//
+//    but they need to be ordered / sorted by encounter order
+//    // map module id's -> modules
+//}

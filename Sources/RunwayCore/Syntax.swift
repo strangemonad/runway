@@ -1,3 +1,82 @@
+
+public struct Syntax {
+    fileprivate init() {}
+
+
+    /// Package syntax
+
+    public struct Lib {
+        var namespace: String
+        var declarations: Spec
+
+        public init(namespace: String, declarations: Spec) {
+            self.namespace = namespace
+            self.declarations = declarations
+        }
+    }
+
+
+    /// Module syntax
+    // XXX sig spec vs spec morphism
+    // XXX naming. / module level stuff
+
+    public typealias Spec = [Dec]
+
+    public enum Dec {
+        case decl(_: Decl)
+        case def(_: Def)
+    }
+
+
+    /// Core syntax
+
+    // c:T
+    public struct Decl {
+        var name : String
+        var ty: Ty
+
+        public init(name: String, ty: Ty) {
+            self.name = name
+            self.ty = ty
+        }
+    }
+
+    // c = T of c:T = o
+    public struct Def {
+        var name: String
+        var ty: Ty
+        // XXX defined constant
+
+        public init(name: String, ty: Ty) {
+            self.name = name
+            self.ty = ty
+        }
+    }
+
+    public enum Ty {
+        case int
+        case data(_: DataSig)
+    }
+
+    // The body of a data type (for now) is identical to it's constructors – 
+    // an array of c:T declarations.
+    //
+    // Does allowing Ty (istead of a tyvar or something similar) open us 
+    // up to too much recursion?
+    public typealias DataSig = [Decl]
+
+    // public struct DataSig {
+    //     // (constructor, rho:Ty) pairs
+    //     var constructors: [(name: String, rho: Ty)]
+
+    //     public init(constructors: [(name: String, rho: Ty)]) {
+    //         self.constructors = constructors
+    //     }
+
+    // }
+}
+
+
 // struct Syntax {
 //     private init() { }
 

@@ -10,7 +10,12 @@ import Sourcery
 // TODO constant?
 public let INDENT: String = "    ";
 
-extension File: Formatable {
+public protocol FormatableJava: Formatable {}
+
+// public protocol FormatableJava: Formatable where Lang: Java {
+// }
+
+extension File: FormatableJava {
     public func format() -> String {
         return """
         package \(package);
@@ -20,7 +25,7 @@ extension File: Formatable {
     }
 }
 
-extension TopLevel: Formatable {
+extension TopLevel: FormatableJava {
     public func format() -> String {
         switch self {
         case let .clazz(clazz):
@@ -31,7 +36,7 @@ extension TopLevel: Formatable {
     }
 }
 
-extension Class: Formatable {
+extension Class: FormatableJava {
     public func format() -> String {
         // XXX hard coded modifiers
         return """
@@ -42,14 +47,14 @@ extension Class: Formatable {
     }
 }
 
-extension Field: Formatable {
+extension Field: FormatableJava {
     public func format() -> String {
         // XXX modifiers
         return "public final \(type) \(name);"
     }
 }
 
-extension Interface: Formatable {
+extension Interface: FormatableJava {
     public func format() -> String {
         // XXX hard coded modifiers
         return """

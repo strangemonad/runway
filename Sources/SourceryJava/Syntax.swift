@@ -1,4 +1,8 @@
 
+import Sourcery
+
+// An empty marker protocol.
+
 public struct File {
     var package: String
     var topLevel: TopLevel
